@@ -1,0 +1,39 @@
+stages:
+  parse_corpus:
+    cmd: uv run python -m src.app.parse_corpus --corpus-dir data/raw/corpus --metadata data/raw/metadata.csv --occurrence data/raw/occurrences.csv --output data/interim/tokens.csv
+    deps:
+      - data/raw/occurrences.csv
+      - data/raw/corpus
+      - data/raw/metadata.csv
+      - src/app/parse_corpus.py
+      - src/infra/parser/textgrid_parser.py
+    outs:
+      - data/interim/tokens.csv
+
+  extract_acoustics:
+    cmd: uv run python -m src.app.extract_accoustics --input data/interim/tokens.csv --audio-dir data/raw/corpus --output data/processed/features_acoustic.csv
+    deps:
+      - data/interim/tokens.csv
+      - data/raw/corpus
+      - src/app/extract_accoustics.py
+      - src/infra/extractor/praat_acoustic_extractor.py
+    outs:
+      - data/processed/features_acoustic.csv
+
+  extract_neural_whisper:
+    cmd: uv run python -m src.app.extract_neural --model whisper-medium --layers 1 12 24 --output data/processed/features_whisper.npz
+    deps:
+      - data/interim/tokens.csv
+      - src/app/extract_neural.py
+      - src/infra/extractor/hugging_face_neural_extractor.py
+    outs:
+      - data/processed/features_whisper.npz
+
+  extract_neural_xlsr:
+    cmd: uv run python -m src.app.extract_neural --model xlsr-53 --layers 1 12 24 --output data/processed/features_xlsr.npz
+    deps:
+      - data/interim/tokens.csv
+      - src/app/extract_neural.py
+      - src/infra/extractor/hugging_face_neural_extractor.py
+    outs:
+      - data/processed/features_xlsr.npz
