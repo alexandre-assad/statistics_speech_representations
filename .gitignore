@@ -1,0 +1,6 @@
+.dvc
+.venv
+uv.lock
+__pycache__
+.python-version
+data/raw/corpus/

@@ -1,0 +1,146 @@
+schema: '2.0'
+stages:
+  parse_corpus:
+    cmd: uv run python -m src.app.parse_corpus --corpus-dir data/raw/corpus 
+      --metadata data/raw/metadata.csv --occurrence data/raw/occurrences.csv 
+      --output data/interim/tokens.csv
+    deps:
+    - path: data/raw/corpus
+      hash: md5
+      md5: f740bda64fa177d7c2cfbb84602feb88.dir
+      size: 738308394
+      nfiles: 5928
+    - path: data/raw/metadata.csv
+      hash: md5
+      md5: c1436dcbae5e46962e5db6c7b26f0043
+      size: 580
+    - path: data/raw/occurrences.csv
+      hash: md5
+      md5: cd26f4bd0212e8b58b97bb16ecdb58c8
+      size: 540
+    - path: src/app/parse_corpus.py
+      hash: md5
+      md5: 0dddfa21473ddecce28d422a309034e9
+      size: 1835
+    - path: src/infra/parser/textgrid_parser.py
+      hash: md5
+      md5: 00057daf51f59216998c1c6178027c41
+      size: 1459
+    outs:
+    - path: data/interim/tokens.csv
+      hash: md5
+      md5: 1e510fe16efbb10b738cbf9c5f7278f0
+      size: 2851154
+  extract_acoustics:
+    cmd: uv run python -m src.app.extract_accoustics --input 
+      data/interim/tokens.csv --audio-dir data/raw/corpus --output 
+      data/processed/features_acoustic.csv
+    deps:
+    - path: data/interim/tokens.csv
+      hash: md5
+      md5: 1e510fe16efbb10b738cbf9c5f7278f0
+      size: 2851154
+    - path: data/raw/corpus
+      hash: md5
+      md5: f740bda64fa177d7c2cfbb84602feb88.dir
+      size: 738308394
+      nfiles: 5928
+    - path: src/app/extract_accoustics.py
+      hash: md5
+      md5: 88a8bf9c3879638da6c6c407a03fbc25
+      size: 1208
+    - path: src/infra/extractor/praat_acoustic_extractor.py
+      hash: md5
+      md5: b58efa22ac96bad97206e9f4ac1df01d
+      size: 2080
+    outs:
+    - path: data/processed/features_acoustic.csv
+      hash: md5
+      md5: bdd7eba328102aafd84c6143fbdfb653
+      size: 5023020
+  extract_neural_whisper:
+    cmd: uv run python -m src.app.extract_neural --model whisper-medium --layers
+      1 12 24 --output data/processed/features_whisper.npz
+    deps:
+    - path: data/interim/tokens.csv
+      hash: md5
+      md5: 1e510fe16efbb10b738cbf9c5f7278f0
+      size: 2851154
+    - path: src/app/extract_neural.py
+      hash: md5
+      md5: 8fdcdb5ce4655627e6cb43fe44ae2fce
+      size: 1727
+    - path: src/infra/extractor/hugging_face_neural_extractor.py
+      hash: md5
+      md5: 402eee9c0a9edecc64c9cad3e240c86f
+      size: 1403
+    outs:
+    - path: data/processed/features_whisper.npz
+      hash: md5
+      md5: 4e5a2aa53a95b00f79f224490c1a0ab2
+      size: 189778760
+  extract_neural_xlsr:
+    cmd: uv run python -m src.app.extract_neural --model xlsr-53 --layers 1 12 
+      24 --output data/processed/features_xlsr.npz
+    deps:
+    - path: data/interim/tokens.csv
+      hash: md5
+      md5: 1e510fe16efbb10b738cbf9c5f7278f0
+      size: 2851154
+    - path: src/app/extract_neural.py
+      hash: md5
+      md5: 8fdcdb5ce4655627e6cb43fe44ae2fce
+      size: 1727
+    - path: src/infra/extractor/hugging_face_neural_extractor.py
+      hash: md5
+      md5: 402eee9c0a9edecc64c9cad3e240c86f
+      size: 1403
+    outs:
+    - path: data/processed/features_xlsr.npz
+      hash: md5
+      md5: bf468a9e50dca97baab0ebac8c2ea536
+      size: 279766831
+  normalize:
+    cmd: uv run python -m src.app.normalize
+    outs:
+    - path: data/processed/final_analysis_table.csv
+      hash: md5
+      md5: d83bb142b9347c872399274499c6c539
+      size: 2286187
+  analyse:
+    cmd:
+    - uv run python -m src.app.fast_diagnose
+    - uv run python -m src.app.analyse_visualize
+    - uv run python -m src.app.analyse_stats
+    - uv run python -m src.app.analyse_rsa
+    deps:
+    - path: data/processed/features_whisper.npz
+      hash: md5
+      md5: 4e5a2aa53a95b00f79f224490c1a0ab2
+      size: 189778760
+    - path: data/processed/features_xlsr.npz
+      hash: md5
+      md5: bf468a9e50dca97baab0ebac8c2ea536
+      size: 279766831
+    - path: data/processed/final_analysis_table.csv
+      hash: md5
+      md5: e6473b9b4d74c4dc8b46fa68a0a35071
+      size: 2286221
+    - path: src/app/analyse_stats.py
+      hash: md5
+      md5: 6db646aeec1c3e6d58d7a0edead9c286
+      size: 3429
+    - path: src/app/analyse_visualize.py
+      hash: md5
+      md5: 0b8ce216fba6981e022dd4ab0a7a83cc
+      size: 2002
+    outs:
+    - path: results/figures/
+      hash: md5
+      md5: eab0f3ff012282db08261fc3de689821.dir
+      size: 14314202
+      nfiles: 9
+    - path: results/stats_results.json
+      hash: md5
+      md5: dcb7a8d57698a925418beb914e7775ed
+      size: 317
