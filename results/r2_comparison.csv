@@ -1,0 +1,4 @@
+Name,R2_m,R2_c
+Acoustique (F1),0.593,0.593
+Neural (Whisper),0.613,0.617
+Neural (XLS-R),0.709,0.711

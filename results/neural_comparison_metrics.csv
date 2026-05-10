@@ -1,0 +1,5 @@
+Model,Method,Var_Ratio_2D
+Whisper,PCA,0.6114663
+Whisper,UMAP,0.6047646
+XLS-R,PCA,0.6100363
+XLS-R,UMAP,0.73723453

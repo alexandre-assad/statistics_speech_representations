@@ -1,0 +1,10 @@
+{
+    "vsa_acoustic_fr": 2.6161,
+    "vsa_neural_fr": 249.2023,
+    "vsa_acoustic_ru": 1.8774,
+    "vsa_neural_ru": 182.934,
+    "acoustic_neural_correlation": 0.5464,
+    "correlation_p_value": 0.0,
+    "neural_variance_ratio": 0.2955582797671692,
+    "neural_cosine_similarity_ratio": 0.9170374920759874
+}

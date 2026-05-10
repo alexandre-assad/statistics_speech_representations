@@ -47,12 +47,24 @@ stages:
 
   analyse:
     cmd:
+      - uv run python -m src.app.analyse_descriptive
+      - uv run python -m src.app.analyse_descriptive_boxplot
+      - uv run python -m src.app.analyse_neural_comparaison
+      - uv run python -m src.app.analyse_group_comparisons
+      - uv run python -m src.app.analyse_inter_phoneme
+      - uv run python -m src.app.analyse_loso_l1_l2
+      - uv run python -m src.app.analyse_lme_strategy
+      - uv run python -m src.app.analyse_ci_forest
+      - uv run python -m src.app.analyse_neural_rope
+      - uv run python -m src.app.analyse_rope
+      - uv run python -m src.app.analyse_rope_summary
+      - uv run python -m src.app.analyse_clustering
+      - uv run python -m src.app.analyse_cv_clustering
+      - uv run python -m src.app.analyse_speaker_clustering
       - uv run python -m src.app.analyse_visualize
       - uv run python -m src.app.analyse_stats
       - uv run python -m src.app.analyse_rsa
       - uv run python -m src.app.analyse_lme
-      - uv run python -m src.app.analyse_rope
-      - uv run python -m src.app.analyse_clustering
     deps:
       - data/processed/final_analysis_table.csv
       - data/processed/features_whisper.npz

@@ -20,12 +20,12 @@ stages:
       size: 540
     - path: src/app/parse_corpus.py
       hash: md5
-      md5: 0dddfa21473ddecce28d422a309034e9
-      size: 1835
+      md5: 58b6686d7ad1475eadfb6cc086ef623c
+      size: 1842
     - path: src/infra/parser/textgrid_parser.py
       hash: md5
-      md5: 00057daf51f59216998c1c6178027c41
-      size: 1459
+      md5: 8e63f510b76ea27242b863d74117f10d
+      size: 1552
     outs:
     - path: data/interim/tokens.csv
       hash: md5
@@ -47,12 +47,12 @@ stages:
       nfiles: 5928
     - path: src/app/extract_accoustics.py
       hash: md5
-      md5: 88a8bf9c3879638da6c6c407a03fbc25
-      size: 1208
+      md5: 50d7c650df59cbccb8827b176c7e581e
+      size: 1202
     - path: src/infra/extractor/praat_acoustic_extractor.py
       hash: md5
-      md5: b58efa22ac96bad97206e9f4ac1df01d
-      size: 2080
+      md5: 5ef3c8cbaca26cdb8495ab3fe59634e2
+      size: 2154
     outs:
     - path: data/processed/features_acoustic.csv
       hash: md5

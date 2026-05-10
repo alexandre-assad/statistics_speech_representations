@@ -1,0 +1,28 @@
+Phoneme,Representation,Point Estimate,CI 95%,ROPE Classification
+a,Acoustic (F1),0.003,"[-0.229, 0.235]",Equivalent
+a,Whisper,0.012,"[0.008, 0.018]",Equivalent
+a,XLS-R,0.025,"[0.016, 0.037]",Equivalent
+e,Acoustic (F1),0.016,"[-0.501, 0.534]",Indeterminate
+e,Whisper,0.013,"[0.009, 0.018]",Equivalent
+e,XLS-R,0.051,"[0.028, 0.084]",Equivalent
+i,Acoustic (F1),0.001,"[-0.161, 0.163]",Equivalent
+i,Whisper,0.01,"[0.006, 0.014]",Equivalent
+i,XLS-R,0.03,"[0.015, 0.049]",Equivalent
+o,Acoustic (F1),0.14,"[-0.043, 0.323]",Equivalent
+o,Whisper,0.016,"[0.011, 0.024]",Equivalent
+o,XLS-R,0.042,"[0.023, 0.077]",Equivalent
+u,Acoustic (F1),-0.159,"[-0.316, -0.003]",Equivalent
+u,Whisper,0.007,"[0.005, 0.011]",Equivalent
+u,XLS-R,0.026,"[0.015, 0.042]",Equivalent
+y,Acoustic (F1),-0.217,"[-0.338, -0.095]",Equivalent
+y,Whisper,0.011,"[0.008, 0.015]",Equivalent
+y,XLS-R,0.037,"[0.023, 0.058]",Equivalent
+ø,Acoustic (F1),0.071,"[-0.143, 0.285]",Equivalent
+ø,Whisper,0.018,"[0.012, 0.028]",Equivalent
+ø,XLS-R,0.062,"[0.036, 0.099]",Equivalent
+ɑ,Acoustic (F1),0.178,"[-0.182, 0.539]",Indeterminate
+ɑ,Whisper,0.025,"[0.016, 0.039]",Equivalent
+ɑ,XLS-R,0.078,"[0.041, 0.132]",Equivalent
+ɛ,Acoustic (F1),-0.365,"[-0.579, -0.150]",Indeterminate
+ɛ,Whisper,0.012,"[0.009, 0.017]",Equivalent
+ɛ,XLS-R,0.048,"[0.031, 0.069]",Equivalent
