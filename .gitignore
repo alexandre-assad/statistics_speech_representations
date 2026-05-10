@@ -1,6 +1,6 @@
 .dvc
 .venv
-dvc.lock
 uv.lock
 __pycache__
 .python-version
+data/raw/corpus/

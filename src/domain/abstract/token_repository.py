@@ -3,6 +3,7 @@ from collections.abc import Iterable
 
 from src.domain.model.phoneme_token import PhonemeToken
 
+
 class TokenRepository(ABC):
 
     @abstractmethod
@@ -18,5 +19,7 @@ class TokenRepository(ABC):
         pass
 
     @abstractmethod
-    def save_neural_representations(self, model_name: str, layer: int, representations: dict) -> None:
+    def save_neural_representations(
+        self, model_name: str, layer: int, representations: dict
+    ) -> None:
         pass

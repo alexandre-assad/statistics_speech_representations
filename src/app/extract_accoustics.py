@@ -6,12 +6,13 @@ from numpy import full
 from src.infra.repository.csv_token_repository import CSVTokenRepository
 from src.infra.extractor.praat_acoustic_extractor import PraatAcousticExtractor
 
+
 def run_extraction(input_csv: str, audio_dir: str, output_csv: str):
     repo = CSVTokenRepository(output_path=Path(input_csv))
     extractor = PraatAcousticExtractor()
-    
+
     tokens = repo.load_all_tokens()
-    
+
     for token in tokens:
         full_audio_path = Path(token.file_path)
         if full_audio_path.exists():
@@ -21,9 +22,10 @@ def run_extraction(input_csv: str, audio_dir: str, output_csv: str):
                 print(f"Error on token {token.token_id}: {e}")
         else:
             print(full_audio_path)
-    
+
     repo.output_path = Path(output_csv)
     repo.save_tokens(tokens)
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
